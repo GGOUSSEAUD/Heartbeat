@@ -1,0 +1,32 @@
+#version 330
+//#include <math.h>
+out vec4 color;
+uniform int time;
+float myPow(float x, int y)
+{
+  float res = 1;
+  for (; y>0; y--)
+    res *= x;
+  return res;
+}
+
+float coeur(float x,float y)
+{
+  
+  return (((x*x+y*y-1)*(x*x+y*y-1)*(x*x+y*y-1))- (x*x) *(y*y*y))/* * abs(sin(10+5*(time/0.80))) */;
+  // float res = powf(powf(x, 2.0) + powf(y, 2.0) - 1.0, 3.0) - (powf(x, 2.0) * powf(y, 3.0));
+  //return res;
+}
+
+void main()
+{
+  float x = (((gl_FragCoord.x/800.0) * 2 )- 1.0)/* * abs(sin(0.8*0.2*(time/0.80))) */;
+  float y = (((gl_FragCoord.y/600.0) * 2 )- 1.0)/* * abs(sin(0.8*0.2*(time/0.80))) */;
+  
+  if(coeur( (x * 3)* abs(sin(0.4+0.2*(time/2))), (y * 3)* abs(sin(0.4+0.2*(time/2))))>0)
+    color = vec4(1.0, 1.0 , 1.0 , 1.0);
+  else
+    color = vec4(1.0, 0.0 , 0.0 , 1.0);
+ 
+}
+
